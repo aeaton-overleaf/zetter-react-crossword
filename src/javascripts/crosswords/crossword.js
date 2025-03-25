@@ -7,7 +7,6 @@ import mediator from 'lib/mediator';
 import { isBreakpoint } from 'lib/detect';
 import { scrollTo } from 'lib/scroller';
 import { addEventListener } from 'lib/events';
-import { AnagramHelper } from 'crosswords/anagram-helper/main';
 import debounce from 'lodash/debounce';
 import zip from 'lodash/zip';
 import { Clues } from 'crosswords/clues';
@@ -265,21 +264,6 @@ class Crossword extends Component {
       });
 
       this.saveGrid();
-    }
-  }
-
-  onToggleAnagramHelper() {
-    // only show anagram helper if a clue is active
-    if (!this.state.showAnagramHelper) {
-      if (this.clueInFocus()) {
-        this.setState({
-          showAnagramHelper: true,
-        });
-      }
-    } else {
-      this.setState({
-        showAnagramHelper: false,
-      });
     }
   }
 
@@ -764,17 +748,6 @@ class Crossword extends Component {
   render() {
     const focused = this.clueInFocus();
 
-    const anagramHelper = this.state.showAnagramHelper && (
-    <AnagramHelper
-      key={focused.id}
-      crossword={this}
-      focussedEntry={focused}
-      entries={this.props.data.entries}
-      grid={this.state.grid}
-      close={this.onToggleAnagramHelper}
-    />
-    );
-
     const gridProps = {
       rows: this.rows,
       columns: this.columns,
@@ -843,7 +816,6 @@ class Crossword extends Component {
                 this.hiddenInputComponent = hiddenInputComponent;
               }}
             />
-            {anagramHelper}
           </div>
         </div>
         <Controls

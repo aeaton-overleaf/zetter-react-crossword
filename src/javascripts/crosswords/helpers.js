@@ -83,24 +83,6 @@ const getNumbersForGroupedEntries = clueGroup => clueGroup[0].humanNumber;
 
 const getTtotalLengthOfGroup = clueGroup => clueGroup.reduce((total, clue) => total + clue.length, 0);
 
-const getAnagramClueData = (entries, clue) => {
-  if (clueIsInGroup(clue)) {
-    const groupEnts = getGroupEntriesForClue(entries, clue.group);
-    const groupClue = {
-      id: clue.id,
-      number: getNumbersForGroupedEntries(groupEnts),
-      length: getTtotalLengthOfGroup(groupEnts),
-      separatorLocations: getAllSeparatorsForGroup(groupEnts),
-      direction: '',
-      clue: getClueForGroupedEntries(groupEnts),
-    };
-
-    return groupClue;
-  }
-
-  return clue;
-};
-
 const cluesAreInGroup = (clue, otherClue) => otherClue.group.includes(clue.id);
 
 const cellsForEntry = entry => (isAcross(entry)
@@ -116,16 +98,6 @@ const cellsForEntry = entry => (isAcross(entry)
 const checkClueHasBeenAnswered = (grid, entry) => cellsForEntry(entry).every(position => /^.$/.test(grid[position.x][position.y].value));
 
 const otherDirection = direction => (direction === 'across' ? 'down' : 'across');
-
-const cellsForClue = (entries, clue) => {
-  if (clueIsInGroup(clue)) {
-    const entriesForClue = getGroupEntriesForClue(entries, clue.group);
-
-    return flattenDeep(entriesForClue.map(entry => cellsForEntry(entry)));
-  }
-
-  return cellsForEntry(clue);
-};
 
 /** Hash key for the cell at x, y in the clue map */
 const clueMapKey = (x, y) => `${x}_${y}`;
@@ -282,11 +254,9 @@ export {
   buildClueMap,
   buildSeparatorMap,
   cellsForEntry,
-  cellsForClue,
   entryHasCell,
   gridSize,
   mapGrid,
-  getAnagramClueData,
   getLastCellInClue,
   isFirstCellInClue,
   isLastCellInClue,
