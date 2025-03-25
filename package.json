@@ -50,13 +50,6 @@
     "url": "https://github.com/zetter/react-crossword.git"
   },
   "homepage": "https://github.com/zetter/react-crossword",
-  "scripts": {
-    "eslint-fix": "eslint --color --fix src/javascripts examples *.js",
-    "eslint": "eslint --color src/javascripts examples *.js",
-    "test": "yarn eslint && yarn jest",
-    "examples": "yarn run webpack-dev-server --host 0.0.0.0 --config webpack.config.examples.js",
-    "build": "yarn run webpack --config webpack.config.js"
-  },
   "files": [
     "lib"
   ],
