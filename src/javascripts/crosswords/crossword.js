@@ -70,7 +70,7 @@ class Crossword extends Component {
     );
     this.setGridHeight();
 
-    addEventListener(window, 'scroll', () => {
+    window.addEventListener('scroll', () => {
       const gameOffset = $game.offset();
       const stickyClueWrapperOffset = $stickyClueWrapper.offset();
       const scrollY = window.scrollY;
