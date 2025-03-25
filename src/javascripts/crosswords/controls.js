@@ -31,17 +31,6 @@ class Controls extends Component {
       controls.grid.unshift(
         <ConfirmButton
           className={`${buttonClassName} ${buttonGenericClassName}`}
-          onClick={this.props.crossword.onSolution.bind(
-            this.props.crossword,
-          )}
-          key="solution"
-          data-link-name="Reveal all"
-          text="Reveal all"
-        />,
-      );
-      controls.grid.unshift(
-        <ConfirmButton
-          className={`${buttonClassName} ${buttonGenericClassName}`}
           onClick={this.props.crossword.onCheckAll.bind(
             this.props.crossword,
           )}
@@ -68,18 +57,6 @@ class Controls extends Component {
       );
 
       if (hasSolutions) {
-        controls.clue.unshift(
-          <button
-            className={`${buttonClassName} ${buttonCurrentClassName}`}
-            onClick={this.props.crossword.onCheat.bind(
-              this.props.crossword,
-            )}
-            key="cheat"
-            data-link-name="Reveal this"
-          >
-            Reveal this
-          </button>,
-        );
         controls.clue.unshift(
           <button
             className={`${buttonClassName} ${buttonCurrentClassName}`}

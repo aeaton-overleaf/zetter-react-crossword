@@ -31,7 +31,6 @@ import {
   cellsForEntry,
 } from 'crosswords/helpers';
 import { keycodes } from 'crosswords/keycodes';
-import { saveGridState, loadGridState } from 'crosswords/persistence';
 import { classNames } from 'crosswords/classNames';
 
 class Crossword extends Component {
@@ -198,19 +197,9 @@ class Crossword extends Component {
     }
   }
 
-  onCheat() {
-    this.allHighlightedClues().forEach(clue => this.cheat(clue));
-    this.saveGrid();
-  }
-
   onCheck() {
     // 'Check this' checks single and grouped clues
     this.allHighlightedClues().forEach(clue => this.check(clue));
-    this.saveGrid();
-  }
-
-  onSolution() {
-    this.props.data.entries.forEach(clue => this.cheat(clue));
     this.saveGrid();
   }
 
@@ -657,29 +646,6 @@ class Crossword extends Component {
     });
   }
 
-  cheat(entry) {
-    const cells = cellsForEntry(entry);
-
-    if (entry.solution) {
-      this.setState({
-        grid: mapGrid(this.state.grid, (cell, x, y) => {
-          if (cells.some(c => c.x === x && c.y === y)) {
-            const n = entry.direction === 'across'
-              ? x - entry.position.x
-              : y - entry.position.y;
-            const previousValue = cell.value;
-            cell.value = entry.solution[n];
-            this.props.onMove({
-              x, y, value: cell.value, previousValue,
-            });
-          }
-
-          return cell;
-        }),
-      });
-    }
-  }
-
   check(entry) {
     const cells = cellsForEntry(entry);
 
@@ -838,8 +804,6 @@ class Crossword extends Component {
 Crossword.defaultProps = {
   onMove: () => {},
   onFocusClue: () => {},
-  loadGrid: id => loadGridState(id),
-  saveGrid: (id, grid) => saveGridState(id, grid),
 };
 
 export default Crossword;
