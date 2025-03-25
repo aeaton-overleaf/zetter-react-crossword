@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import fastdom from 'fastdom';
 import $ from 'lib/$';
-import mediator from 'lib/mediator';
 import { isBreakpoint } from 'lib/detect';
 import { scrollTo } from 'lib/scroller';
 import { addEventListener } from 'lib/events';
@@ -62,12 +61,12 @@ class Crossword extends Component {
     const $stickyClueWrapper = $(findDOMNode(this.stickyClueWrapper));
     const $game = $(findDOMNode(this.game));
 
-    mediator.on(
-      'window:resize',
+    window.addEventListener(
+      'resize',
       debounce(this.setGridHeight.bind(this), 200),
     );
-    mediator.on(
-      'window:orientationchange',
+    window.addEventListener(
+      'orientationchange',
       debounce(this.setGridHeight.bind(this), 200),
     );
     this.setGridHeight();

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import bean from 'bean';
 import fastdom from 'fastdom';
 import { classNames } from 'crosswords/classNames';
 import { isBreakpoint } from 'lib/detect';
@@ -54,7 +53,7 @@ class Clues extends Component {
 
     const height = this.$cluesNode.scrollHeight - this.$cluesNode.clientHeight;
 
-    bean.on(this.$cluesNode, 'scroll', (e) => {
+    this.$cluesNode.addEventListener('scroll', (e) => {
       const showGradient = height - e.currentTarget.scrollTop > 25;
 
       if (this.state.showGradient !== showGradient) {
