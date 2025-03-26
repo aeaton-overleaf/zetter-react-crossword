@@ -1,6 +1,5 @@
 import '../../stylesheets/main.css';
 import React, { useState, useEffect, useRef } from 'react';
-import { findDOMNode } from 'react-dom';
 import fastdom from 'fastdom';
 import $ from '../lib/$';
 import { isBreakpoint } from '../lib/detect';
@@ -66,8 +65,8 @@ const Crossword: React.FC<CrosswordProps> = ({
   const hiddenInputComponent = useRef<any>(null);
 
   useEffect(() => {
-    const $stickyClueWrapper = $(findDOMNode(stickyClueWrapper.current));
-    const $game = $(findDOMNode(game.current));
+    const $stickyClueWrapper = $(stickyClueWrapper.current);
+    const $game = $(game.current);
 
     const handleResize = debounce(setGridHeight, 200);
     window.addEventListener('resize', handleResize);
@@ -415,7 +414,7 @@ const Crossword: React.FC<CrosswordProps> = ({
   };
 
   const focusHiddenInput = (x: number, y: number) => {
-    const wrapper = findDOMNode(hiddenInputComponent.current.wrapper) as HTMLElement;
+    const wrapper = hiddenInputComponent.current.wrapper;
     const left = gridSize(x);
     const top = gridSize(y);
     const position = asPercentage(left, top);
@@ -423,7 +422,7 @@ const Crossword: React.FC<CrosswordProps> = ({
     wrapper.style.left = `${position.x}%`;
     wrapper.style.top = `${position.y}%`;
 
-    const hiddenInputNode = findDOMNode(hiddenInputComponent.current.input) as HTMLElement;
+    const hiddenInputNode = hiddenInputComponent.current.input;
 
     if (document.activeElement !== hiddenInputNode) {
       hiddenInputNode.focus();
