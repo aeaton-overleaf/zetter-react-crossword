@@ -4,8 +4,17 @@ import { constants } from '../lib/constants';
 import GridCell from './cell';
 import { classNames } from '../lib/classNames';
 
+interface GridProps {
+  rows: number;
+  columns: number;
+  cells: any[];
+  separators: any;
+  crossword: any;
+  focussedCell: { x: number; y: number } | null;
+}
+
 // Position at end of previous cell
-const createWordSeparator = (x, y, direction) => {
+const createWordSeparator = (x: number, y: number, direction: string) => {
   const top = gridSize(y);
   const left = gridSize(x);
   const borderWidth = 1;
@@ -36,7 +45,7 @@ const createWordSeparator = (x, y, direction) => {
 };
 
 // Position in-between this and previous cells
-const createHyphenSeparator = (x, y, direction) => {
+const createHyphenSeparator = (x: number, y: number, direction: string) => {
   const top = gridSize(y);
   const left = gridSize(x);
   const borderWidth = 1;
@@ -70,7 +79,7 @@ const createHyphenSeparator = (x, y, direction) => {
   }
 };
 
-const createSeparator = (x, y, separatorDescription) => {
+const createSeparator = (x: number, y: number, separatorDescription: any) => {
   if (separatorDescription) {
     if (separatorDescription.separator === ',') {
       return createWordSeparator(x, y, separatorDescription.direction);
@@ -80,17 +89,17 @@ const createSeparator = (x, y, separatorDescription) => {
   }
 };
 
-export const Grid = (props) => {
-  const getSeparators = (x, y) => props.separators[clueMapKey(x, y)];
+export const Grid: React.FC<GridProps> = (props) => {
+  const getSeparators = (x: number, y: number) => props.separators[clueMapKey(x, y)];
 
-  const handleSelect = (x, y) => props.crossword.onSelect(x, y);
+  const handleSelect = (x: number, y: number) => props.crossword.onSelect(x, y);
 
   const width = gridSize(props.columns);
   const height = gridSize(props.rows);
   const cells = [];
-  let separators = [];
+  let separators: any[] = [];
 
-  const range = n => Array.from({ length: n }, (value, key) => key);
+  const range = (n: number) => Array.from({ length: n }, (value, key) => key);
 
   // This is needed to appease ESLint (https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unused-prop-types.md#false-positives-sfc)
   const cellsIn = props.cells;

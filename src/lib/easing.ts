@@ -7,14 +7,13 @@
    https://gist.github.com/gre/1650294
 */
 
-const easeIn = power => t => t ** power;
+const easeIn = (power: number) => (t: number) => t ** power;
 
-const easeOut = power => t => 1 - Math.abs((t - 1) ** power);
+const easeOut = (power: number) => (t: number) => 1 - Math.abs((t - 1) ** power);
 
-const easeInOut = power => t => (t < 0.5 ? easeIn(power)(t * 2) / 2 : easeOut(power)(t * 2 - 1) / 2 + 0.5);
+const easeInOut = (power: number) => (t: number) => (t < 0.5 ? easeIn(power)(t * 2) / 2 : easeOut(power)(t * 2 - 1) / 2 + 0.5);
 
-// #? these probably should not be generated on parse but on being called
-const easingFunctions = {
+const easingFunctions: { [key: string]: (t: number) => number } = {
   // no easing, no acceleration
   linear: easeInOut(1),
 
@@ -55,12 +54,12 @@ const easingFunctions = {
   easeInOutQuint: easeInOut(5),
 };
 
-const createEasing = (type, duration) => {
-  const startTime = new Date();
+const createEasing = (type: string, duration: number) => {
+  const startTime = new Date().getTime();
   const ease = easingFunctions[type];
 
   return () => {
-    const elapsed = new Date() - startTime;
+    const elapsed = new Date().getTime() - startTime;
     return ease(Math.min(1, elapsed / duration));
   };
 };

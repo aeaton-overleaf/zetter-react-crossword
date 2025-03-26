@@ -1,4 +1,4 @@
-const keycodes = {
+const keycodes: { [key: string]: number } = {
   backspace: 8,
   tab: 9,
   left: 37,
