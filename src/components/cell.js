@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { gridSize } from 'crosswords/helpers';
-import { constants } from 'crosswords/constants';
-import { classNames } from 'crosswords/classNames';
+import { gridSize } from '../lib/helpers';
+import { constants } from '../lib/constants';
+import { classNames } from '../lib/classNames';
 
 class Cell extends Component {
   shouldComponentUpdate(nextProps) {

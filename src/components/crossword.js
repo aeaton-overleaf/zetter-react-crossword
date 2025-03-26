@@ -7,10 +7,10 @@ import { isBreakpoint } from 'lib/detect';
 import { scrollTo } from 'lib/scroller';
 import debounce from 'lodash/debounce';
 import zip from 'lodash/zip';
-import { Clues } from 'crosswords/clues';
-import { Controls } from 'crosswords/controls';
-import { HiddenInput } from 'crosswords/hidden-input';
-import { Grid } from 'crosswords/grid';
+import { Clues } from './clues';
+import { Controls } from './controls';
+import { HiddenInput } from './hidden-input';
+import { Grid } from './grid';
 import {
   buildClueMap,
   buildGrid,
@@ -28,9 +28,9 @@ import {
   checkClueHasBeenAnswered,
   buildSeparatorMap,
   cellsForEntry,
-} from 'crosswords/helpers';
-import { keycodes } from 'crosswords/keycodes';
-import { classNames } from 'crosswords/classNames';
+} from '../lib/helpers';
+import { keycodes } from '../lib/keycodes';
+import { classNames } from '../lib/classNames';
 
 class Crossword extends Component {
   constructor(props) {
