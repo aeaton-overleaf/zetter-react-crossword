@@ -1,11 +1,10 @@
-import 'main.scss';
+import '../../stylesheets/main.css';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import fastdom from 'fastdom';
 import $ from 'lib/$';
 import { isBreakpoint } from 'lib/detect';
 import { scrollTo } from 'lib/scroller';
-import { addEventListener } from 'lib/events';
 import debounce from 'lodash/debounce';
 import zip from 'lodash/zip';
 import { Clues } from 'crosswords/clues';
@@ -51,7 +50,6 @@ class Crossword extends Component {
       ),
       cellInFocus: null,
       directionOfEntry: null,
-      showAnagramHelper: false,
     };
   }
 
@@ -98,16 +96,6 @@ class Crossword extends Component {
 
     const entryId = window.location.hash.replace('#', '');
     this.focusFirstCellInClueById(entryId);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // return focus to active cell after exiting anagram helper
-    if (
-      !this.state.showAnagramHelper
-            && this.state.showAnagramHelper !== prevState.showAnagramHelper
-    ) {
-      this.focusCurrentCell();
-    }
   }
 
   onKeyDown(event) {

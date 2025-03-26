@@ -1,7 +1,7 @@
 import { throttle } from "lodash";
 
 // These should match those defined in:
-//   stylesheets/_vars.scss
+//   stylesheets/main.css
 //   common/app/layout/Breakpoint.scala
 const breakpoints = [
   {
@@ -154,10 +154,9 @@ const getViewport = () => {
   };
 };
 
-const getBreakpoint =
-  (includeTweakpoint) => (includeTweakpoint
-    ? currentTweakpoint
-    : currentBreakpoint);
+const getBreakpoint = (
+  includeTweakpoint,
+) => (includeTweakpoint ? currentTweakpoint : currentBreakpoint);
 
 const isBreakpoint = (criteria) => {
   const indexMin = criteria.min ? breakpointNames.indexOf(criteria.min) : 0;
